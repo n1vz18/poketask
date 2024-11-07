@@ -1,50 +1,45 @@
-# React + TypeScript + Vite
+Перед запуском может потребоваться включить VPN. Платформа pokeapi.co в настоящее время работает не стабильно. 
+# Требования
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- решение НЕ должно быть создано в новой ветке, НЕ должно быть форком этого репозитория
+- ответ предоставить в виде ссылки на отдельный репозиторий, либо архив
 
-Currently, two official plugins are available:
+# Рекомендации
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- использовать npm
+- не отходить далеко от существующей структуры
+- желательно развернуть проект на Heroku, Render, Codesandbox, etc.
 
-## Expanding the ESLint configuration
+# Цель
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Имея готовое апи https://pokeapi.co/docs/v2#resource-listspagination-section ([Swagger](https://api.swaggerhub.com/apis/pawelwelfle/PokemonApi/3.0.0)) реализовать
 
-- Configure the top-level `parserOptions` property like this:
+## Вывод списка покемонов, используя
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- TypeScript, **any** быть не должно
+- [Tailwind](https://tailwindcss.com/) или [EmotionJS](https://emotion.sh/docs/styled) для минимальной стилизации
+- [react-query](https://tanstack.com/query) в связке с [Axios](https://github.com/axios/axios)
+- кодогенерацию API клиента (желательно)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Уровень 1 (Done)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- список имен Покемонов, где это _name_ из ответа API;
+- Пагинация, 20 покемонов на странице, число страниц рассчитывается из ответа _count_ из API.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Уровень 2 (Done)
+
+- Добавление "карточек" покемонов, кроме имени отображение данных, полученных из API https://pokeapi.co/docs/v2#pokemon-section
+
+### Уровень 3
+
+- Добавление фильтра по https://pokeapi.co/docs/v2#abilities, реализовать можно как панелью, так и дропдауном (селектом), выбранных параметров может быть несколько.
+
+### Уровень 4
+
+- Создание дополнительной страницы-фильтра по https://pokeapi.co/docs/v2#pokemon-habitats с учетом ранее приведеных фильтров
+
+**Нет необходимости выполнять все уровни**
+
+Главый критерий **Уровень 1**, **Уровень 2** крайне желателен к реализации.
+
+Удачи =)
